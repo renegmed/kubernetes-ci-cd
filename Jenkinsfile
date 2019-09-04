@@ -40,7 +40,7 @@ pipeline {
           steps {
               script{
                 echo "appName: ${appName}"
-                ls -als 'applications/${appName}/k8s'
+                sh "ls -als applications/${appName}/k8s"                
                 kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
               }
           }
