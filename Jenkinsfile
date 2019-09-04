@@ -7,7 +7,7 @@ pipeline {
         appName = "hello-kenzan"
         registryHost = "127.0.0.1:30400/"
         imageName = "${registryHost}${appName}:${tag}"
-        //BUILDIMG=imageName
+        //BUILDIMG="${imageName}"
     }
    
 
@@ -37,7 +37,9 @@ pipeline {
 
       stage("Deploy") {
           steps {
-            kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
+              script{
+                kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
+              }
           }
       }
 
