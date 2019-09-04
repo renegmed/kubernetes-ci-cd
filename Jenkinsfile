@@ -31,6 +31,7 @@ pipeline {
       stage("Push") {
           steps {
             sh "docker push ${imageName}"
+            sh "docker push ${registryHost}${appName}:latest"
           }  
       }
     
@@ -38,6 +39,7 @@ pipeline {
       stage("Deploy") {
           steps {
               script{
+                echo "appName: ${appName}"
                 kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
               }
           }
