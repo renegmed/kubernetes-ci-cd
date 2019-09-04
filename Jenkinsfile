@@ -37,15 +37,15 @@ pipeline {
       }
     
 
-    //   stage("Deploy") {
-    //       steps {
-    //           script{
-    //             echo "appName: ${appName}"
-    //             sh "ls -als applications/${appName}/k8s"                
-    //             kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
-    //           }
-    //       }
-    //   }
+      stage("Deploy") {
+          steps {
+              script{
+                echo "appName: ${appName}"
+                sh "ls -als applications/${appName}/k8s"                
+                kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
+              }
+          }
+      }
 
     }
 }
